@@ -1,0 +1,45 @@
+# Digit Classification Training Configuration
+
+# Model parameters
+model:
+  name: "resnet18"
+  pretrained: true
+  num_classes: 10  # Digits 0-9
+
+# Training parameters
+training:
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  img_size: 64
+  device: "auto"
+
+# Data parameters
+data:
+  train_path: "data/processed/train/digit_cls"
+  val_path: "data/processed/val/digit_cls"
+  test_path: "data/processed/test/digit_cls"
+  num_workers: 4
+
+# Augmentation parameters
+augmentation:
+  rotation_range: 15
+  width_shift_range: 0.1
+  height_shift_range: 0.1
+  shear_range: 0.1
+  zoom_range: 0.1
+  horizontal_flip: false
+  fill_mode: "nearest"
+  brightness_range: [0.9, 1.1]
+  contrast_range: [0.9, 1.1]
+
+# Loss and metrics
+loss:
+  type: "cross_entropy"
+
+# Logging and checkpointing
+logging:
+  save_dir: "checkpoints"
+  save_period: 5
+  tensorboard: true 

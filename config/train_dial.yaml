@@ -1,0 +1,45 @@
+# Dial Detector Training Configuration
+
+# Model parameters
+model:
+  name: "yolov8n"  # Using YOLOv8 nano as base model
+  pretrained: true
+  num_classes: 1    # Only detecting meter dials
+
+# Training parameters
+training:
+  batch_size: 16
+  epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.0005
+  momentum: 0.937
+  img_size: 640
+  device: "auto"    # Automatically select best available device
+
+# Data parameters
+data:
+  train_path: "data/processed/train/images"
+  val_path: "data/processed/val/images"
+  test_path: "data/processed/test/images"
+  num_workers: 4
+
+# Augmentation parameters
+augmentation:
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  degrees: 0.0
+  translate: 0.1
+  scale: 0.5
+  shear: 0.0
+  perspective: 0.0
+  flipud: 0.0
+  fliplr: 0.5
+  mosaic: 1.0
+  mixup: 0.0
+
+# Logging and checkpointing
+logging:
+  save_dir: "checkpoints"
+  save_period: 10
+  tensorboard: true 

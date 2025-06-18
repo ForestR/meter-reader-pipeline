@@ -1,0 +1,48 @@
+# Digit Segmentation Training Configuration
+
+# Model parameters
+model:
+  name: "unet"
+  encoder_name: "resnet34"
+  encoder_weights: "imagenet"
+  in_channels: 3
+  classes: 1  # Binary segmentation
+
+# Training parameters
+training:
+  batch_size: 8
+  epochs: 100
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  img_size: 256
+  device: "auto"
+
+# Data parameters
+data:
+  train_path: "data/processed/train/digit_seg"
+  val_path: "data/processed/val/digit_seg"
+  test_path: "data/processed/test/digit_seg"
+  num_workers: 4
+
+# Augmentation parameters
+augmentation:
+  rotation_range: 20
+  width_shift_range: 0.2
+  height_shift_range: 0.2
+  shear_range: 0.2
+  zoom_range: 0.2
+  horizontal_flip: true
+  fill_mode: "nearest"
+  brightness_range: [0.8, 1.2]
+  contrast_range: [0.8, 1.2]
+
+# Loss and metrics
+loss:
+  type: "bce_dice"  # Binary Cross Entropy + Dice Loss
+  dice_weight: 0.5
+
+# Logging and checkpointing
+logging:
+  save_dir: "checkpoints"
+  save_period: 10
+  tensorboard: true 
